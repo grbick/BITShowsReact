@@ -1,0 +1,15 @@
+.showInfo{
+    text-align: start;
+    padding: 15px 35px;
+    position: relative;
+    & span{
+        position: absolute;
+        right: 40px;
+        top: -20px;
+        padding: 10px;
+        background-color: #5b5bfe;
+        border-radius: 50%;
+        color: white;
+        font-size: 0.85em;
+    }
+}

@@ -1,0 +1,20 @@
+.searchInput{
+    margin: 10px auto;
+    width: 65%;
+    display: flex;
+    gap: 2%;
+    & img{
+        width: 30px;
+    }
+}
+#search{
+    border-bottom: 2px solid #d1cfcf;
+    width: 100%;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    font-weight: 300;
+    padding: 0;
+    & ::placeholder{
+        color: #d1cfcf;
+    }
+}

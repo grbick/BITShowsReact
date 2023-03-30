@@ -1,0 +1,20 @@
+.header {
+  width: 100%;
+  padding: 15px 100px;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #edbe17;
+  color: black;
+  & button {
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer;
+    & h1,
+    h3 {
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+  }
+}

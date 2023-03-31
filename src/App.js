@@ -8,8 +8,8 @@ import { ApplicationProvider } from "./context";
 
 const App = () => {
   let results = 30;
-  let totalResults;
-  let maxCounter = Math.ceil(totalResults / results)
+  const [totalResults, setTotalResults] = useState(1)
+  let maxCounter= Math.ceil(totalResults / results)
   let [counter, setCounter] = useState(1)
   const [pageState, setPageState] = useState(null)
   const [shows, setShows] = useState([])
@@ -24,17 +24,18 @@ const App = () => {
     fetch('http://api.tvmaze.com/shows')
       .then((res) => res.json())
       .then((data) => {
-        
-        setShows(data.sort((a, b) => b.rating.average - a.rating.average).filter((e, i) => i >= first && i <= last));
-         totalResults = data.length
-      })
-    }
-    useEffect(() => {
-    fetchData();
-  }, []);
 
-  const changePage = (step) =>{
-    counter+= step
+        setShows(data.sort((a, b) => b.rating.average - a.rating.average).filter((e, i) => i >= first && i <= last));
+        setTotalResults(data.length)
+      })
+  }
+  useEffect(() => {
+    fetchData();
+  }, [counter]);
+
+  const changePage = (step) => {
+    console.log(maxCounter);
+    counter += step
     if (counter < 1) counter = 1;
     if (counter > maxCounter) counter = maxCounter;
     first = (counter - 1) * results + 1
@@ -46,11 +47,11 @@ const App = () => {
   }
 
   return (
-    <ApplicationProvider value = {{shows, pageStateSetter, counter, changePage, maxCounter}}>
-    <div>
-      {pageState === null ?
-        <LandingPage/> : pageState === 'about' ? <AboutPage /> : <SingleShow />}
-    </div>
+    <ApplicationProvider value={{ shows, pageStateSetter, counter, changePage, maxCounter }}>
+      <div>
+        {pageState === null ?
+          <LandingPage /> : pageState === 'about' ? <AboutPage /> : <SingleShow />}
+      </div>
     </ApplicationProvider>
   )
 }
